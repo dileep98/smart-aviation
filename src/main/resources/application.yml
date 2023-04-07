@@ -12,22 +12,25 @@ spring:
           isolation: '2'
         check_nullability: true
     show-sql: true
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
 
+springdoc:
+  packagesToScan: com.sv.smartaviation
 
 logging:
   level:
-    org:
-      hibernate:
-        type: trace
+    org.hibernate.type: trace
+    com.sv.smartaviation: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
 
 api:
   airlabs:
     url: https://airlabs.co/api/v9
-#    key: ${AIR_LABS_KEY}
+    #    key: ${AIR_LABS_KEY}
     key: 6df9ff4a-c629-41e6-a0a0-a207d214e380
+    debug: true
 
 server:
   port: 9000

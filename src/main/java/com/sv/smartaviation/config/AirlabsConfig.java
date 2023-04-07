@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class AirlabsConfig {
     private String url;
     private String key;
+    private boolean debug = false;
 
 
 }

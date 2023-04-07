@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightController {
 
     private final FlightsService flightsService;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Flight> getFlights(){
+    public ResponseEntity<Flight> getFlights() {
         return ResponseEntity.ok(flightsService.getFLights());
     }
 
