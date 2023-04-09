@@ -3,7 +3,8 @@ package com.sv.smartaviation.config;
 import com.sv.smartaviation.auth.CustomUserDetailsService;
 import com.sv.smartaviation.auth.JwtAuthenticationEntryPoint;
 import com.sv.smartaviation.auth.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sv.smartaviation.auth.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,16 +27,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         jsr250Enabled = true,
         prePostEnabled = true
 )
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    private final CustomUserDetailsService customUserDetailsService;
+
+    private final JwtAuthenticationEntryPoint unauthorizedHandler;
+    private final JwtTokenProvider tokenProvider;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
+        return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService);
     }
 
     @Override
@@ -70,6 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/swagger-ui/index.html",
+                        "/v3/api-docs/**")
+                .permitAll()
                 .antMatchers("/",
                         "/favicon.ico",
                         "/**/*.png",
@@ -80,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/api/auth/**")
+                .antMatchers("/api/v1/auth/**")
                 .permitAll()
                 .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
                 .permitAll()
