@@ -1,7 +1,7 @@
 package com.sv.smartaviation.model;
 
 @lombok.Data
-public class Request {
+public class FlightRequest {
     private String lang;
     private String currency;
     private long time;

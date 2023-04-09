@@ -4,7 +4,7 @@ import java.util.List;
 
 @lombok.Data
 public class Flight {
-    private Request request;
-    private List<Response> response;
+    private FlightRequest request;
+    private List<FlightResponse> response;
     private String terms;
 }

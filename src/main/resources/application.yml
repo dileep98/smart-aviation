@@ -3,6 +3,9 @@ spring:
     url: 'jdbc:mysql://localhost:3306/db'
     username: user
     password: user
+  sql:
+    init:
+      mode: always
   jpa:
     properties:
       hibernate:
@@ -11,10 +14,21 @@ spring:
         connection:
           isolation: '2'
         check_nullability: true
+    hibernate:
+      ddl-auto: create
     show-sql: true
+    defer-datasource-initialization: true
   jackson:
+    time-zone: UTC
     serialization:
       FAIL_ON_EMPTY_BEANS: false
+      WRITE_DATES_AS_TIMESTAMPS: 'false'
+
+app:
+  jwtSecret: 9a02115a835ee03d5fb83cd8a468ea33e4090aaaec87f53c9fa54512bbef4db8dc656c82a315fa0c785c08b0134716b81ddcd0153d2a7556f2e154912cf5675f
+  jwtExpirationInMs: 604800000
+  cors:
+    allowedOrigins: http://localhost:3000/
 
 springdoc:
   packagesToScan: com.sv.smartaviation

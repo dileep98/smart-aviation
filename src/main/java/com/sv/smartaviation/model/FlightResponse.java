@@ -1,7 +1,7 @@
 package com.sv.smartaviation.model;
 
 @lombok.Data
-public class Response {
+public class FlightResponse {
     private String hex;
     private String regNumber;
     private String flag;
