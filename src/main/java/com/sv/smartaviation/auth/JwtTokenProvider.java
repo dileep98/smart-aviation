@@ -14,7 +14,6 @@ import java.util.Date;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,22 +27,38 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
-    public String generateToken(Authentication authentication) {
+    @Value("${app.jwtRefreshExpirationInMs}")
+    private int jwtRefreshExpirationInMs;
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+    public String generateToken(String userId) {
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
-        var keyBytes = Decoders.BASE64.decode(jwtSecret);
-        Key key = Keys.hmacShaKeyFor(keyBytes);
-
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
+                .setSubject(userId)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(getKey(), SignatureAlgorithm.HS512)
                 .compact();
+    }
+
+    public String generateRefreshToken(String userId) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + jwtRefreshExpirationInMs);
+
+        return Jwts.builder()
+                .setSubject(userId)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(expiryDate)
+                .signWith(getKey(), SignatureAlgorithm.HS512)
+                .compact();
+
+    }
+
+    private Key getKey() {
+        var keyBytes = Decoders.BASE64.decode(jwtSecret);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public Long getUserIdFromJWT(String token) {

@@ -1,6 +1,7 @@
 package com.sv.smartaviation.controller;
 
 import com.sv.smartaviation.auth.JwtTokenProvider;
+import com.sv.smartaviation.auth.UserPrincipal;
 import com.sv.smartaviation.entity.Role;
 import com.sv.smartaviation.entity.RoleName;
 import com.sv.smartaviation.entity.User;
@@ -8,9 +9,13 @@ import com.sv.smartaviation.exception.AppException;
 import com.sv.smartaviation.model.ApiResponse;
 import com.sv.smartaviation.model.JwtAuthenticationResponse;
 import com.sv.smartaviation.model.LoginRequest;
+import com.sv.smartaviation.model.RefreshRequest;
 import com.sv.smartaviation.model.SignUpRequest;
 import com.sv.smartaviation.repository.RoleRepository;
 import com.sv.smartaviation.repository.UserRepository;
+import java.net.URI;
+import java.util.Collections;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,10 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -59,19 +60,39 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        var principal = (UserPrincipal)authentication.getPrincipal();
+        var userId = Long.toString(principal.getId());
 
-        String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        String jwt = tokenProvider.generateToken(userId);
+        String refreshToken = tokenProvider.generateRefreshToken(userId);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, refreshToken));
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<JwtAuthenticationResponse> refreshToken(@Valid @RequestBody RefreshRequest refreshRequest) {
+        String requestRefreshToken = refreshRequest.getRefreshToken();
+        if (!tokenProvider.validateToken(requestRefreshToken)) {
+            throw new AppException("Invalid refresh token");
+        }
+
+        var userId = Long.toString(tokenProvider.getUserIdFromJWT(requestRefreshToken));
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = tokenProvider.generateToken(userId);
+        String refreshToken = tokenProvider.generateRefreshToken(userId);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, refreshToken));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
+        if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
             return new ResponseEntity<>(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
             return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
