@@ -5,7 +5,7 @@ spring:
     password: user
   sql:
     init:
-      mode: always
+      mode: never
   jpa:
     properties:
       hibernate:
@@ -15,7 +15,7 @@ spring:
           isolation: '2'
         check_nullability: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     defer-datasource-initialization: true
   jackson:
@@ -26,7 +26,8 @@ spring:
 
 app:
   jwtSecret: 9a02115a835ee03d5fb83cd8a468ea33e4090aaaec87f53c9fa54512bbef4db8dc656c82a315fa0c785c08b0134716b81ddcd0153d2a7556f2e154912cf5675f
-  jwtExpirationInMs: 604800000
+  jwtExpirationInMs: 1800000 # 30mins
+  jwtRefreshExpirationInMs: 3600000 # 1hr
   cors:
     allowedOrigins: http://localhost:3000/
 
