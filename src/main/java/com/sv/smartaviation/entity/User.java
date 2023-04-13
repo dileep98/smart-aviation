@@ -1,6 +1,7 @@
 package com.sv.smartaviation.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
@@ -47,10 +49,6 @@ public class User extends DateAudit {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    public User() {
-
-    }
 
     public User(String name, String username, String email, String password) {
         this.name = name;
