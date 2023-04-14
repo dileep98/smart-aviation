@@ -1,18 +1,21 @@
 package com.sv.smartaviation.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.search.engine.backend.types.Sortable;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+
 
 @Entity
 @Data
 @Table(name = "airports")
+@Indexed
 public class Airport {
     @Id
     @Size(max = 3)
@@ -24,10 +27,13 @@ public class Airport {
 
     @Size(max = 70)
     @NotBlank
+    @FullTextField(analyzer = "custom_lowercase")
+    @KeywordField(name = "name_sort", sortable = Sortable.YES)
     private String name;
 
     @Size(max = 3)
     @NotBlank
+    @FullTextField(analyzer = "custom_lowercase")
     private String cityCode;
 
     @Size(max = 2)
@@ -48,12 +54,15 @@ public class Airport {
     private String icao;
 
     @Size(max = 50)
+    @FullTextField(analyzer = "custom_lowercase")
     private String city;
 
     @Size(max = 50)
+    @FullTextField(analyzer = "custom_lowercase")
     private String county;
 
     @Size(max = 70)
+    @FullTextField(analyzer = "custom_lowercase")
     private String state;
 
 }
