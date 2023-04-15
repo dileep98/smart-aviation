@@ -10,3 +10,7 @@ docker-compose build
 ```shell
 docker-compose up
 ```
+3. To start only mysql service use
+```shell
+docker-compose up mysql
+```
