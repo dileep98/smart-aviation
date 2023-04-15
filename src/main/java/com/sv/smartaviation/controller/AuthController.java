@@ -7,6 +7,7 @@ import com.sv.smartaviation.entity.RoleName;
 import com.sv.smartaviation.entity.User;
 import com.sv.smartaviation.exception.AppException;
 import com.sv.smartaviation.model.auth.*;
+import com.sv.smartaviation.model.user.UserPreference;
 import com.sv.smartaviation.repository.RoleRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.net.URI;
@@ -113,4 +114,10 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
+
+    // TODO
+    /*@PostMapping("/updateUserPreference")
+    public ResponseEntity<UserPreference> updateUserPreference(@Valid @RequestBody Use){
+
+    }*/
 }
