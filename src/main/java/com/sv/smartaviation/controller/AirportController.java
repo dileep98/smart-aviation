@@ -2,6 +2,7 @@ package com.sv.smartaviation.controller;
 
 import com.sv.smartaviation.entity.Airport;
 import com.sv.smartaviation.service.AirportService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class AirportController {
     private final AirportService airportService;
 

@@ -2,15 +2,14 @@ package com.sv.smartaviation.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sv.smartaviation.entity.User;
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {

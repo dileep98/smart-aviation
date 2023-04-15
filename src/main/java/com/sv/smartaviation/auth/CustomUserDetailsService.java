@@ -3,7 +3,6 @@ package com.sv.smartaviation.auth;
 import com.sv.smartaviation.entity.User;
 import com.sv.smartaviation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

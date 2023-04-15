@@ -32,6 +32,6 @@ public class HibernateSearchIndexBuild implements ApplicationListener<Applicatio
             Thread.currentThread().interrupt();
         }
         stopWatch.stop();
-        log.info("Completed Indexing in {} ms",stopWatch.getTime());
+        log.info("Completed Indexing in {} ms", stopWatch.getTime());
     }
 }

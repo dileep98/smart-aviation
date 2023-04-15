@@ -7,38 +7,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@Table(name = "user_preference", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "flight_id"})
-})
-public class UserPreference {
-
+@Table(name = "user_profile")
+public class UserProfile extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
+    @Size(max = 15)
     @Column(nullable = false)
-    private boolean smsToggle = false;
+    private String phoneNumber;
 
-    @NotBlank
-    @Column(nullable = false)
-    private boolean emailToggle = false;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
 }

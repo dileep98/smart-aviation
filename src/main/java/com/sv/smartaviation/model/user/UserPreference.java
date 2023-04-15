@@ -1,23 +1,19 @@
 package com.sv.smartaviation.model.user;
 
+import javax.validation.constraints.NotNull;
+
 @lombok.Data
 public class UserPreference {
 
-    private String name;
+    private Long id;
 
-    private String username;
+    private boolean smsToggle = false;
 
-    private String email;
+    private boolean emailToggle = false;
 
-    private String phoneNumber;
+    @NotNull
+    private Long flightId;
 
-    private String password;
-
-    private String confirmPassword;
-
-    private boolean smsToggle = true;
-
-    private boolean emailToggle = true;
-
+    @NotNull
     private Long userId;
 }

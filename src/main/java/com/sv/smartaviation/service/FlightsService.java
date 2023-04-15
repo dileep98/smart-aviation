@@ -1,21 +1,20 @@
 package com.sv.smartaviation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sv.smartaviation.entity.SavedFlight;
-import com.sv.smartaviation.model.skyscanner.Flight;
+import com.sv.smartaviation.entity.Flight;
+import com.sv.smartaviation.exception.NotFoundException;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.el.stream.Optional;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
@@ -29,7 +28,7 @@ public class FlightsService {
     private final UserRepository userRepository;
 
 
-    public Flight getFLights(String origin, String destination, LocalDate departureDate) {
+    public com.sv.smartaviation.model.skyscanner.Flight getFLights(String origin, String destination, LocalDate departureDate) {
         HashMap<String, String> request = new HashMap<>();
         request.put("adults", "1");
         request.put("origin", origin);
@@ -38,11 +37,11 @@ public class FlightsService {
         request.put("currency", "USD");
         // Mock code
         ObjectMapper mapper = new ObjectMapper();
-        Flight flight = new Flight();
+        com.sv.smartaviation.model.skyscanner.Flight flight = new com.sv.smartaviation.model.skyscanner.Flight();
         try {
             String file = "src/test/resources/getFlights.json";
             String json = readFileAsString(file);
-            flight = mapper.readValue(json, Flight.class);
+            flight = mapper.readValue(json, com.sv.smartaviation.model.skyscanner.Flight.class);
         } catch (Exception e) {
 
         } // Mock code
@@ -51,20 +50,21 @@ public class FlightsService {
         return flight;
     }
 
-    public List<SavedFlight> getSavedFlights(){
+    public List<Flight> getSavedFlights() {
         return flightRepository.findAll();
     }
-    public SavedFlight getFlightsById(Long flightId){
-        return flightRepository.findById(flightId).get();
+
+    public Flight getFlightsById(Long flightId) {
+        return flightRepository.findById(flightId).orElseThrow(() -> new NotFoundException("Flight not found"));
     }
 
-    public List<SavedFlight> getFlightsByUserId(Long userId){
-        var user = userRepository.findById(userId).get();
-        return flightRepository.findAllByUserId(user).get();
+    public List<Flight> getFlightsByUserId(Long userId) {
+        var user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+        return flightRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
-    public SavedFlight updateFlight(SavedFlight savedFlight){
-        return flightRepository.save(savedFlight);
+    public Flight updateFlight(Flight flight) {
+        return flightRepository.save(flight);
     }
 
 

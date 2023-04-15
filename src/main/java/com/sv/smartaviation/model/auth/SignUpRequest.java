@@ -1,6 +1,9 @@
 package com.sv.smartaviation.model.auth;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 @lombok.Data
 public class SignUpRequest {
     @NotBlank

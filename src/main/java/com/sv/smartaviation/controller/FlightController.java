@@ -1,52 +1,65 @@
 package com.sv.smartaviation.controller;
 
-import com.sv.smartaviation.entity.SavedFlight;
-import com.sv.smartaviation.model.skyscanner.Flight;
+import com.sv.smartaviation.entity.Flight;
 import com.sv.smartaviation.service.FlightsService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import java.time.LocalDate;
+import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/flights")
 @Slf4j
 @Validated
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class FlightController {
 
     private final FlightsService flightsService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Flight> getFlights(@RequestParam String origin, @RequestParam String destination, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate) {
+    public ResponseEntity<com.sv.smartaviation.model.skyscanner.Flight> getFlights(@RequestParam String origin,
+                                                                                   @RequestParam String destination,
+                                                                                   @RequestParam
+                                                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                                                   LocalDate departureDate) {
         return ResponseEntity.ok(flightsService.getFLights(origin, destination, departureDate));
     }
 
-    @GetMapping("/flightById")
-    public ResponseEntity<SavedFlight> getFlightsById(@RequestParam Long flightId) {
+    @GetMapping("/{flightId}")
+    public ResponseEntity<Flight> getFlightsById(@PathVariable Long flightId) {
         return ResponseEntity.ok(flightsService.getFlightsById(flightId));
     }
 
-    @GetMapping("/flightByUserId")
-    public ResponseEntity<List<SavedFlight>> getFlightsByUserId(@RequestParam Long userId) {
+    @GetMapping("/user/{userId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or #userId == authentication.principal.id")
+    public ResponseEntity<List<Flight>> getFlightsByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(flightsService.getFlightsByUserId(userId));
     }
 
-    @GetMapping("/savedFlights")
-    public ResponseEntity<List<SavedFlight>> getSavedFlights() {
+    @GetMapping("/")
+    public ResponseEntity<List<Flight>> getSavedFlights() {
         return ResponseEntity.ok(flightsService.getSavedFlights());
     }
 
-    @PostMapping("/updateFlight")
-    public ResponseEntity<SavedFlight> updateSavedFlights(@Valid @RequestBody SavedFlight savedFlight){
-        return ResponseEntity.ok(flightsService.updateFlight(savedFlight));
+    @PostMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Flight> updateSavedFlights(@Valid @RequestBody Flight flight) {
+        return ResponseEntity.ok(flightsService.updateFlight(flight));
     }
 
     // TODO

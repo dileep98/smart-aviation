@@ -1,5 +1,6 @@
 package com.sv.smartaviation.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -23,28 +24,34 @@ public class Airport {
 
     @Size(max = 30)
     @NotBlank
+    @Column(nullable = false)
     private String timeZoneId;
 
     @Size(max = 70)
     @NotBlank
+    @Column(nullable = false)
     @FullTextField(analyzer = "custom_lowercase")
     @KeywordField(name = "name_sort", sortable = Sortable.YES)
     private String name;
 
     @Size(max = 3)
     @NotBlank
+    @Column(nullable = false)
     @FullTextField(analyzer = "custom_lowercase")
     private String cityCode;
 
     @Size(max = 2)
     @NotBlank
+    @Column(nullable = false)
     private String countryId;
 
     @Size(max = 50)
     @NotBlank
+    @Column(nullable = false)
     private String location;
 
     @NotBlank
+    @Column(nullable = false)
     private Integer elevation;
 
     @Size(max = 225)

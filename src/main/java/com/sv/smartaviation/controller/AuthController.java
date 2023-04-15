@@ -6,8 +6,11 @@ import com.sv.smartaviation.entity.Role;
 import com.sv.smartaviation.entity.RoleName;
 import com.sv.smartaviation.entity.User;
 import com.sv.smartaviation.exception.AppException;
-import com.sv.smartaviation.model.auth.*;
-import com.sv.smartaviation.model.user.UserPreference;
+import com.sv.smartaviation.model.auth.ApiResponse;
+import com.sv.smartaviation.model.auth.JwtAuthenticationResponse;
+import com.sv.smartaviation.model.auth.LoginRequest;
+import com.sv.smartaviation.model.auth.RefreshRequest;
+import com.sv.smartaviation.model.auth.SignUpRequest;
 import com.sv.smartaviation.repository.RoleRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.net.URI;
@@ -57,7 +60,7 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        var principal = (UserPrincipal)authentication.getPrincipal();
+        var principal = (UserPrincipal) authentication.getPrincipal();
         var userId = Long.toString(principal.getId());
 
         String jwt = tokenProvider.generateToken(userId);
@@ -109,7 +112,7 @@ public class AuthController {
         User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
+                .fromCurrentContextPath().path("/api/v1/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
