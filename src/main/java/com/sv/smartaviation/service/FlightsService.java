@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sv.smartaviation.entity.SavedFlight;
 import com.sv.smartaviation.model.skyscanner.Flight;
 import com.sv.smartaviation.repository.FlightRepository;
+import com.sv.smartaviation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.el.stream.Optional;
@@ -23,7 +24,9 @@ public class FlightsService {
 
     private final RestTemplate restTemplate;
 
-    private FlightRepository flightRepository;
+    private final FlightRepository flightRepository;
+
+    private final UserRepository userRepository;
 
 
     public Flight getFLights(String origin, String destination, LocalDate departureDate) {
@@ -52,11 +55,12 @@ public class FlightsService {
         return flightRepository.findAll();
     }
     public SavedFlight getFlightsById(Long flightId){
-        return flightRepository.findByIdIn(flightId).get();
+        return flightRepository.findById(flightId).get();
     }
 
     public List<SavedFlight> getFlightsByUserId(Long userId){
-        return flightRepository.findAllByUserId(userId).get();
+        var user = userRepository.findById(userId).get();
+        return flightRepository.findAllByUserId(user).get();
     }
 
     public SavedFlight updateFlight(SavedFlight savedFlight){

@@ -21,7 +21,7 @@ spring:
           isolation: '2'
         check_nullability: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
     defer-datasource-initialization: true
   jackson:
