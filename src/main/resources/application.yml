@@ -49,9 +49,10 @@ logging:
 
 api:
   airlabs:
-    url: https://airlabs.co/api/v9
+    url: https://skyscanner44.p.rapidapi.com
+    host: skyscanner44.p.rapidapi.com
     #    key: ${AIR_LABS_KEY}
-    key: 6df9ff4a-c629-41e6-a0a0-a207d214e380
+    key: ytXEqjajXYmsh5qUKlYWDuuTot1fp18ZX42jsnKFioZ4Sk2kMI
     debug: true
 
 server:

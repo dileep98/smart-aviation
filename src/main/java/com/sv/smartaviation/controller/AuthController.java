@@ -6,11 +6,7 @@ import com.sv.smartaviation.entity.Role;
 import com.sv.smartaviation.entity.RoleName;
 import com.sv.smartaviation.entity.User;
 import com.sv.smartaviation.exception.AppException;
-import com.sv.smartaviation.model.ApiResponse;
-import com.sv.smartaviation.model.JwtAuthenticationResponse;
-import com.sv.smartaviation.model.LoginRequest;
-import com.sv.smartaviation.model.RefreshRequest;
-import com.sv.smartaviation.model.SignUpRequest;
+import com.sv.smartaviation.model.auth.*;
 import com.sv.smartaviation.repository.RoleRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.net.URI;
@@ -107,6 +103,7 @@ public class AuthController {
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
+
 
         User result = userRepository.save(user);
 

@@ -3,6 +3,8 @@ package com.sv.smartaviation.config.interceptor;
 import com.sv.smartaviation.config.AirlabsConfig;
 import java.io.IOException;
 import java.net.URI;
+
+import com.sv.smartaviation.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -20,17 +22,9 @@ public class AirLabsApiKeyInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+        request.getHeaders().set(API_KEY,airlabsConfig.getKey());
+        request.getHeaders().set(Constants.HOST,airlabsConfig.getHost());
 
-        URI uri = UriComponentsBuilder.fromHttpRequest(request)
-                .queryParam(API_KEY, airlabsConfig.getKey())
-                .build().toUri();
-
-        HttpRequest modifiedRequest = new HttpRequestWrapper(request) {
-            @Override
-            public URI getURI() {
-                return uri;
-            }
-        };
-        return execution.execute(modifiedRequest, body);
+        return execution.execute(request, body);
     }
 }

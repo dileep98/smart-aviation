@@ -1,4 +1,4 @@
-package com.sv.smartaviation.model;
+package com.sv.smartaviation.model.auth;
 
 import javax.validation.constraints.NotBlank;
 

@@ -1,0 +1,1070 @@
+{
+  "itineraries": {
+    "results": [
+      {
+        "id": "14385-2307131200--32090-0-9828-2307131305",
+        "legs": [
+          {
+            "id": "14385-2307131200--32090-0-9828-2307131305",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T12:00:00",
+            "arrival": "2023-07-13T13:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307131200-2307131305--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T12:00:00",
+                "arrival": "2023-07-13T13:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1938",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 113.05,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1938%7C14385%7C2023-07-13T12%3A00%7C9828%7C2023-07-13T13%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=113.05&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307131200--32090-0-9828-2307131305?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307131400--32090-0-9828-2307131505",
+        "legs": [
+          {
+            "id": "14385-2307131400--32090-0-9828-2307131505",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T14:00:00",
+            "arrival": "2023-07-13T15:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307131400-2307131505--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T14:00:00",
+                "arrival": "2023-07-13T15:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1942",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 98.36,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1942%7C14385%7C2023-07-13T14%3A00%7C9828%7C2023-07-13T15%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=98.36&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307131400--32090-0-9828-2307131505?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307130900--32090-0-9828-2307131005",
+        "legs": [
+          {
+            "id": "14385-2307130900--32090-0-9828-2307131005",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T09:00:00",
+            "arrival": "2023-07-13T10:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307130900-2307131005--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T09:00:00",
+                "arrival": "2023-07-13T10:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1934",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 102.88,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1934%7C14385%7C2023-07-13T09%3A00%7C9828%7C2023-07-13T10%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=102.88&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307130900--32090-0-9828-2307131005?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307132000--32090-0-9828-2307132105",
+        "legs": [
+          {
+            "id": "14385-2307132000--32090-0-9828-2307132105",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T20:00:00",
+            "arrival": "2023-07-13T21:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307132000-2307132105--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T20:00:00",
+                "arrival": "2023-07-13T21:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1960",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 120.97,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1960%7C14385%7C2023-07-13T20%3A00%7C9828%7C2023-07-13T21%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=120.97&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307132000--32090-0-9828-2307132105?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307132130--32090-0-9828-2307132235",
+        "legs": [
+          {
+            "id": "14385-2307132130--32090-0-9828-2307132235",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T21:30:00",
+            "arrival": "2023-07-13T22:35:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307132130-2307132235--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T21:30:00",
+                "arrival": "2023-07-13T22:35:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1962",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 113.05,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1962%7C14385%7C2023-07-13T21%3A30%7C9828%7C2023-07-13T22%3A35%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=113.05&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307132130--32090-0-9828-2307132235?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307130700--32090-0-9828-2307130805",
+        "legs": [
+          {
+            "id": "14385-2307130700--32090-0-9828-2307130805",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T07:00:00",
+            "arrival": "2023-07-13T08:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307130700-2307130805--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T07:00:00",
+                "arrival": "2023-07-13T08:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1928",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 98.36,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1928%7C14385%7C2023-07-13T07%3A00%7C9828%7C2023-07-13T08%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=98.36&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307130700--32090-0-9828-2307130805?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307131700--32090-0-9828-2307131805",
+        "legs": [
+          {
+            "id": "14385-2307131700--32090-0-9828-2307131805",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T17:00:00",
+            "arrival": "2023-07-13T18:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307131700-2307131805--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T17:00:00",
+                "arrival": "2023-07-13T18:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1948",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 183.15,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1948%7C14385%7C2023-07-13T17%3A00%7C9828%7C2023-07-13T18%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=183.15&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307131700--32090-0-9828-2307131805?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307130800--32090-0-9828-2307130905",
+        "legs": [
+          {
+            "id": "14385-2307130800--32090-0-9828-2307130905",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T08:00:00",
+            "arrival": "2023-07-13T09:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307130800-2307130905--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T08:00:00",
+                "arrival": "2023-07-13T09:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1930",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 98.36,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1930%7C14385%7C2023-07-13T08%3A00%7C9828%7C2023-07-13T09%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=98.36&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307130800--32090-0-9828-2307130905?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307131045--32090-0-9828-2307131150",
+        "legs": [
+          {
+            "id": "14385-2307131045--32090-0-9828-2307131150",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T10:45:00",
+            "arrival": "2023-07-13T11:50:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307131045-2307131150--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T10:45:00",
+                "arrival": "2023-07-13T11:50:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1936",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 98.36,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1936%7C14385%7C2023-07-13T10%3A45%7C9828%7C2023-07-13T11%3A50%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=98.36&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307131045--32090-0-9828-2307131150?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      },
+      {
+        "id": "14385-2307131800--32090-0-9828-2307131905",
+        "legs": [
+          {
+            "id": "14385-2307131800--32090-0-9828-2307131905",
+            "origin": {
+              "id": 14385,
+              "name": "Munich",
+              "displayCode": "MUC"
+            },
+            "destination": {
+              "id": 9828,
+              "name": "Berlin Brandenburg",
+              "displayCode": "BER"
+            },
+            "durationInMinutes": 65,
+            "stopCount": 0,
+            "isSmallestStops": true,
+            "departure": "2023-07-13T18:00:00",
+            "arrival": "2023-07-13T19:05:00",
+            "timeDeltaInDays": 0,
+            "carriers": {
+              "marketing": [
+                {
+                  "id": -32090,
+                  "name": "Lufthansa"
+                }
+              ],
+              "operationType": "fully_operated"
+            },
+            "segments": [
+              {
+                "id": "14385-9828-2307131800-2307131905--32090",
+                "origin": {
+                  "flightPlaceId": "MUC",
+                  "parent": {
+                    "flightPlaceId": "MUC",
+                    "name": "Munich",
+                    "type": "City"
+                  },
+                  "name": "Munich",
+                  "type": "Airport"
+                },
+                "destination": {
+                  "flightPlaceId": "BER",
+                  "parent": {
+                    "flightPlaceId": "BER",
+                    "name": "Berlin",
+                    "type": "City"
+                  },
+                  "name": "Berlin Brandenburg",
+                  "type": "Airport"
+                },
+                "departure": "2023-07-13T18:00:00",
+                "arrival": "2023-07-13T19:05:00",
+                "durationInMinutes": 65,
+                "flightNumber": "1952",
+                "marketingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                },
+                "operatingCarrier": {
+                  "id": -32090,
+                  "name": "Lufthansa",
+                  "alternate_di": "LH",
+                  "allianceId": -31999
+                }
+              }
+            ]
+          }
+        ],
+        "pricing_options": [
+          {
+            "agents": [
+              {
+                "id": "bcuk",
+                "name": "Booking.com",
+                "is_carrier": false,
+                "update_status": "current",
+                "optimised_for_mobile": true,
+                "live_update_allowed": true,
+                "rating_status": "available",
+                "rating": 3.96,
+                "feedback_count": 26211,
+                "rating_breakdown": {
+                  "reliable_prices": 3.93838,
+                  "clear_extra_fees": 4.42808,
+                  "customer_service": 4.99216,
+                  "ease_of_booking": 4.327424,
+                  "other": 3.151152
+                }
+              }
+            ],
+            "price": {
+              "amount": 131.14,
+              "update_status": "current",
+              "last_updated": "2023-04-15T08:00:37",
+              "quote_age": 60
+            },
+            "url": "https://www.skyscanner.net/transport_deeplink/4.0/UK/en-GB/EUR/bcuk/1/14385.9828.2023-07-13/air/trava/flights?itinerary=flight%7C-32090%7C1952%7C14385%7C2023-07-13T18%3A00%7C9828%7C2023-07-13T19%3A05%7C65%7C-%7C-%7C-&carriers=-32090&operators=-32090&passengers=1&channel=website&cabin_class=economy&ticket_price=131.14&is_npt=false&is_multipart=false&client_id=skyscanner_website&q_sources=JACQUARD&commercial_filters=false&q_datetime_utc=2023-04-15T08%3A00%3A37&pqid=true"
+          }
+        ],
+        "deeplink": "https://www.skyscanner.net/transport/flights/muc/ber/230713/config/14385-2307131800--32090-0-9828-2307131905?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27547053&originentityid=27545034&inboundaltsenabled=false&infants=0&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=0"
+      }
+    ]
+  },
+  "context": {
+    "status": "incomplete",
+    "sessionId": "6aa020ec-d7e0-49d9-a8cb-ef742e3f0144"
+  }
+}

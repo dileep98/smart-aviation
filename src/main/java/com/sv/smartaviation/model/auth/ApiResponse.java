@@ -1,5 +1,4 @@
-package com.sv.smartaviation.model;
-
+package com.sv.smartaviation.model.auth;
 
 @lombok.Data
 public class ApiResponse {
