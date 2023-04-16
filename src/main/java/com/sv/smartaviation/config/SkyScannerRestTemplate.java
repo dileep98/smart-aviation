@@ -1,6 +1,6 @@
 package com.sv.smartaviation.config;
 
-import com.sv.smartaviation.config.interceptor.AirLabsApiKeyInterceptor;
+import com.sv.smartaviation.config.interceptor.ApiKeyInterceptor;
 import com.sv.smartaviation.config.interceptor.LoggingInterceptor;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,10 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
-public class AirLabsRestTemplate {
+public class SkyScannerRestTemplate {
 
-    private final AirlabsConfig airlabsConfig;
+    private final ApiConfig apiConfig;
+    private final ApiConfig.SkyScannerConfig skyScannerConfig;
 
     @Bean
     public RestTemplate restTemplate() {
@@ -30,13 +31,13 @@ public class AirLabsRestTemplate {
         if (CollectionUtils.isEmpty(interceptors)) {
             interceptors = new ArrayList<>();
         }
-        interceptors.add(new AirLabsApiKeyInterceptor(airlabsConfig));
-        if (airlabsConfig.isDebug() && log.isDebugEnabled()) {
+        interceptors.add(new ApiKeyInterceptor(skyScannerConfig));
+        if (apiConfig.isDebug() && log.isDebugEnabled()) {
             restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
             interceptors.add(new LoggingInterceptor());
         }
         restTemplate.setInterceptors(interceptors);
-        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(airlabsConfig.getUrl()));
+        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(skyScannerConfig.getUrl()));
         return restTemplate;
     }
 

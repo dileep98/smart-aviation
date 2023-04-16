@@ -1,6 +1,7 @@
 package com.sv.smartaviation.model.skyscanner;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @lombok.Data
 public class Leg {
@@ -14,5 +15,5 @@ public class Leg {
     private LocalDateTime arrival;
     private long timeDeltaInDays;
     private Carriers carriers;
-    private Segment[] segments;
+    private List<Segment> segments;
 }

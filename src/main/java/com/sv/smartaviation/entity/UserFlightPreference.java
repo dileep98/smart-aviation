@@ -17,28 +17,28 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user_preference", uniqueConstraints = {
+@Table(name = "user_flight_preferences", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "flight_id"})
 })
-public class UserPreference {
+public class UserFlightPreference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(nullable = false)
-    private boolean smsToggle = false;
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean smsToggle = false;
 
     @NotBlank
-    @Column(nullable = false)
-    private boolean emailToggle = false;
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean emailToggle = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
     private Flight flight;
 }

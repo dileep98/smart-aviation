@@ -1,7 +1,9 @@
 package com.sv.smartaviation.model.skyscanner;
 
+import java.util.List;
+
 @lombok.Data
 public class Carriers {
-    private Marketing[] marketing;
+    private List<Marketing> marketing;
     private String operationType;
 }

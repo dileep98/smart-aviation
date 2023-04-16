@@ -3,7 +3,7 @@ package com.sv.smartaviation.model.flight;
 import java.time.LocalDateTime;
 
 @lombok.Data
-public class SavedFlightRequest {
+public class SavedFlight {
 
     private String originName;
 
@@ -21,7 +21,7 @@ public class SavedFlightRequest {
 
     private String carrierName;
 
-    private Long price;
+    private Double price;
 
     private Long userId;
 }

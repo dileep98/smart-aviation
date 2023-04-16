@@ -71,7 +71,7 @@ public class User extends DateAudit {
     private UserProfile userProfile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Flight> flights = new HashSet<>();
+    private Set<UserFlightPreference> userFlightPreferences = new HashSet<>();
 
     public User(String name, String username, String email, String password) {
         this.name = name;

@@ -37,11 +37,11 @@ public class FlightController {
                                                                                    @RequestParam
                                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                                    LocalDate departureDate) {
-        return ResponseEntity.ok(flightsService.getFLights(origin, destination, departureDate));
+        return ResponseEntity.ok(flightsService.getFlights(origin, destination, departureDate));
     }
 
     @GetMapping("/{flightId}")
-    public ResponseEntity<Flight> getFlightsById(@PathVariable Long flightId) {
+    public ResponseEntity<Flight> getFlightsById(@PathVariable String flightId) {
         return ResponseEntity.ok(flightsService.getFlightsById(flightId));
     }
 
@@ -61,11 +61,4 @@ public class FlightController {
     public ResponseEntity<Flight> updateSavedFlights(@Valid @RequestBody Flight flight) {
         return ResponseEntity.ok(flightsService.updateFlight(flight));
     }
-
-    // TODO
-//    @PostMapping("/saveFlight")
-//    public ResponseEntity<Void> saveFlight(@Valid @RequestBody SignUpRequest signUpRequest){
-//        return ResponseEntity.created();
-//    }
-
 }

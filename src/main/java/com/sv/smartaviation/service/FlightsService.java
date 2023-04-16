@@ -3,14 +3,15 @@ package com.sv.smartaviation.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sv.smartaviation.entity.Flight;
 import com.sv.smartaviation.exception.ResourceNotFoundException;
+import com.sv.smartaviation.mapper.FlightMapper;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,12 @@ import org.springframework.web.client.RestTemplate;
 public class FlightsService {
 
     private final RestTemplate restTemplate;
-
     private final FlightRepository flightRepository;
-
     private final UserRepository userRepository;
+    private final FlightMapper flightMapper;
 
 
-    public com.sv.smartaviation.model.skyscanner.Flight getFLights(String origin, String destination, LocalDate departureDate) {
+    public com.sv.smartaviation.model.skyscanner.Flight getFlights(String origin, String destination, LocalDate departureDate) {
         HashMap<String, String> request = new HashMap<>();
         request.put("adults", "1");
         request.put("origin", origin);
@@ -46,6 +46,17 @@ public class FlightsService {
 
         } // Mock code
 //        Flight flight = restTemplate.getForObject("/search-extended?adults={adults}&origin={origin}&destination={destination}&departureDate={departureDate}&currency={currency}", Flight.class, request);
+        flight.getItineraries().getResults().forEach(
+                f -> {
+                    f.getLegs().forEach(
+                            l -> {
+                                if (!flightRepository.existsById(l.getId())) {
+                                    var flightEntity = flightMapper.map(l, f.getPricingOptions().get(0));
+                                }
+                            }
+                    );
+                }
+        );
         log.debug("Flight Response: {}", flight);
         return flight;
     }
@@ -54,13 +65,17 @@ public class FlightsService {
         return flightRepository.findAll();
     }
 
-    public Flight getFlightsById(Long flightId) {
+    public Flight getFlightsById(String flightId) {
         return flightRepository.findById(flightId).orElseThrow(() -> new ResourceNotFoundException("Flight", "flightId", flightId));
     }
 
     public List<Flight> getFlightsByUserId(Long userId) {
         var user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
-        return flightRepository.findAllByUser(user).orElse(Collections.emptyList());
+        return user.getUserFlightPreferences()
+                .stream()
+                .map(f -> f.getFlight().getId())
+                .map(this::getFlightsById)
+                .collect(Collectors.toList());
     }
 
     public Flight updateFlight(Flight flight) {

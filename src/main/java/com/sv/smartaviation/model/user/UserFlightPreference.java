@@ -3,7 +3,7 @@ package com.sv.smartaviation.model.user;
 import javax.validation.constraints.NotNull;
 
 @lombok.Data
-public class UserPreference {
+public class UserFlightPreference {
 
     private Long id;
 
@@ -12,7 +12,7 @@ public class UserPreference {
     private boolean emailToggle = false;
 
     @NotNull
-    private Long flightId;
+    private String flightId;
 
     @NotNull
     private Long userId;

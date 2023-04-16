@@ -48,12 +48,12 @@ logging:
     org.springframework.web.client.RestTemplate: DEBUG
 
 api:
-  airlabs:
+  debug: true
+  skyScanner:
     url: https://skyscanner44.p.rapidapi.com
     host: skyscanner44.p.rapidapi.com
     #    key: ${AIR_LABS_KEY}
     key: ytXEqjajXYmsh5qUKlYWDuuTot1fp18ZX42jsnKFioZ4Sk2kMI
-    debug: true
 
 server:
   port: 9000
