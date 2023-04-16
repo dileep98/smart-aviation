@@ -2,7 +2,7 @@ package com.sv.smartaviation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sv.smartaviation.entity.Flight;
-import com.sv.smartaviation.exception.NotFoundException;
+import com.sv.smartaviation.exception.ResourceNotFoundException;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.nio.file.Files;
@@ -55,11 +55,11 @@ public class FlightsService {
     }
 
     public Flight getFlightsById(Long flightId) {
-        return flightRepository.findById(flightId).orElseThrow(() -> new NotFoundException("Flight not found"));
+        return flightRepository.findById(flightId).orElseThrow(() -> new ResourceNotFoundException("Flight", "flightId", flightId));
     }
 
     public List<Flight> getFlightsByUserId(Long userId) {
-        var user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+        var user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
         return flightRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
