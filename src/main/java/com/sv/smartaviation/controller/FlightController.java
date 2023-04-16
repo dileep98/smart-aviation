@@ -52,6 +52,7 @@ public class FlightController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<Flight>> getSavedFlights() {
         return ResponseEntity.ok(flightsService.getSavedFlights());
     }

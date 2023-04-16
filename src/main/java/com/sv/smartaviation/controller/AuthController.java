@@ -117,10 +117,4 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
-
-    // TODO
-    /*@PostMapping("/updateUserPreference")
-    public ResponseEntity<UserPreference> updateUserPreference(@Valid @RequestBody Use){
-
-    }*/
 }
