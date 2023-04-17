@@ -61,10 +61,9 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         var principal = (UserPrincipal) authentication.getPrincipal();
-        var userId = Long.toString(principal.getId());
 
-        String jwt = tokenProvider.generateToken(userId);
-        String refreshToken = tokenProvider.generateRefreshToken(userId);
+        String jwt = tokenProvider.generateToken(principal.getId());
+        String refreshToken = tokenProvider.generateRefreshToken(principal.getId());
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, refreshToken));
     }
 
@@ -75,7 +74,7 @@ public class AuthController {
             throw new AppException("Invalid refresh token");
         }
 
-        var userId = Long.toString(tokenProvider.getUserIdFromJWT(requestRefreshToken));
+        var userId = tokenProvider.getUserIdFromJWT(requestRefreshToken);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);

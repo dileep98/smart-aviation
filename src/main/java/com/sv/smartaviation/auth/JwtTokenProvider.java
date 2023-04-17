@@ -1,5 +1,8 @@
 package com.sv.smartaviation.auth;
 
+import com.sv.smartaviation.entity.Role;
+import com.sv.smartaviation.exception.ResourceNotFoundException;
+import com.sv.smartaviation.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +14,9 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import java.security.Key;
 import java.util.Date;
+import java.util.stream.Collectors;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,6 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @Slf4j
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
     @Value("${app.jwtSecret}")
@@ -30,25 +36,38 @@ public class JwtTokenProvider {
     @Value("${app.jwtRefreshExpirationInMs}")
     private int jwtRefreshExpirationInMs;
 
-    public String generateToken(String userId) {
+    @Value("${app.jwtAuthoritiesKey}")
+    public String jwtAuthoritiesKey;
+
+    private final UserRepository userRepository;
+
+    public String generateToken(Long userId) {
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
+        var user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user", "userId", userId));
+        String roles = user.getRoles()
+                .stream()
+                .map(Role::getName)
+                .map(Enum::toString)
+                .collect(Collectors.joining(","));
+
         return Jwts.builder()
-                .setSubject(userId)
+                .setSubject(Long.toString(userId))
+                .claim(jwtAuthoritiesKey, roles)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(getKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
-    public String generateRefreshToken(String userId) {
+    public String generateRefreshToken(Long userId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtRefreshExpirationInMs);
 
         return Jwts.builder()
-                .setSubject(userId)
+                .setSubject(Long.toString(userId))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(expiryDate)
                 .signWith(getKey(), SignatureAlgorithm.HS512)
