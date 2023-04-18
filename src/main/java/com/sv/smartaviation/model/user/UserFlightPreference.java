@@ -7,9 +7,7 @@ public class UserFlightPreference {
 
     private Long id;
 
-    private boolean smsToggle = false;
-
-    private boolean emailToggle = false;
+    private boolean enabled = false;
 
     @NotNull
     private String flightId;

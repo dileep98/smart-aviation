@@ -7,9 +7,7 @@ public class UserFlightPreferenceResponse {
 
     private Long id;
 
-    private boolean smsToggle;
-
-    private boolean emailToggle;
+    private boolean enabled;
 
     private SavedFlight flight;
 }

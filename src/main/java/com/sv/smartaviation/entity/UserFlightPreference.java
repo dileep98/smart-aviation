@@ -28,11 +28,7 @@ public class UserFlightPreference {
 
     @NotBlank
     @Column(nullable = false, columnDefinition = "BOOLEAN")
-    private Boolean smsToggle = false;
-
-    @NotBlank
-    @Column(nullable = false, columnDefinition = "BOOLEAN")
-    private Boolean emailToggle = false;
+    private Boolean enabled = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

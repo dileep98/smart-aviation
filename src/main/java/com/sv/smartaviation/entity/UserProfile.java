@@ -26,6 +26,14 @@ public class UserProfile extends DateAudit {
     @Column(nullable = false)
     private String phoneNumber;
 
+    @NotBlank
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean smsToggle = false;
+
+    @NotBlank
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean emailToggle = false;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
