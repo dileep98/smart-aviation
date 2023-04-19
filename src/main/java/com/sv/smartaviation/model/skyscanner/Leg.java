@@ -1,5 +1,6 @@
 package com.sv.smartaviation.model.skyscanner;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Leg {
     private LegDestination destination;
     private long durationInMinutes;
     private long stopCount;
+    @JsonProperty("isSmallestStops")
     private boolean isSmallestStops;
     private LocalDateTime departure;
     private LocalDateTime arrival;

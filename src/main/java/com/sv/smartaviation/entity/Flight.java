@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
@@ -37,24 +38,23 @@ public class Flight extends DateAudit {
     @Column(nullable = false)
     private String destinationCode;
 
-    @NotBlank
-    @Size(max = 15)
+    @NotNull
     @Column(nullable = false)
     private Integer stopCount;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDateTime departureDateTime;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDateTime arrivalDateTime;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private String carrierName;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Double price;
 }

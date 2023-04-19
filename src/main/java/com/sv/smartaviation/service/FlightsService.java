@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sv.smartaviation.entity.Flight;
 import com.sv.smartaviation.exception.ResourceNotFoundException;
 import com.sv.smartaviation.mapper.FlightMapper;
+import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +30,7 @@ public class FlightsService {
     private final FlightMapper flightMapper;
 
 
-    public com.sv.smartaviation.model.skyscanner.Flight getFlights(String origin, String destination, LocalDate departureDate) {
+    public List<SavedFlight> getFlights(String origin, String destination, LocalDate departureDate) {
         HashMap<String, String> request = new HashMap<>();
         request.put("adults", "1");
         request.put("origin", origin);
@@ -37,28 +39,36 @@ public class FlightsService {
         request.put("currency", "USD");
         // Mock code
         ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
         com.sv.smartaviation.model.skyscanner.Flight flight = new com.sv.smartaviation.model.skyscanner.Flight();
         try {
             String file = "src/test/resources/getFlights.json";
             String json = readFileAsString(file);
             flight = mapper.readValue(json, com.sv.smartaviation.model.skyscanner.Flight.class);
         } catch (Exception e) {
-
+            log.error("Error while mapping", e);
         } // Mock code
 //        Flight flight = restTemplate.getForObject("/search-extended?adults={adults}&origin={origin}&destination={destination}&departureDate={departureDate}&currency={currency}", Flight.class, request);
+        List<SavedFlight> savedFlights = new ArrayList<>();
         flight.getItineraries().getResults().forEach(
-                f -> {
-                    f.getLegs().forEach(
-                            l -> {
-                                if (!flightRepository.existsById(l.getId())) {
-                                    var flightEntity = flightMapper.map(l, f.getPricingOptions().get(0));
-                                }
+                f -> f.getLegs().forEach(
+                        l -> {
+                            var flightEntityOptional = flightRepository.findById(l.getId());
+                            if(flightEntityOptional.isPresent()) {
+                                var flight1 = flightEntityOptional.get();
+                                var savedFlight = flightMapper.map(flight1);
+                                savedFlights.add(savedFlight);
+                            } else {
+                                var flightEntity = flightMapper.map(l, f.getPricingOptions().get(0));
+                                var flight1 = flightRepository.save(flightEntity);
+                                var savedFlight = flightMapper.map(flight1);
+                                savedFlights.add(savedFlight);
                             }
-                    );
-                }
+                        }
+                )
         );
         log.debug("Flight Response: {}", flight);
-        return flight;
+        return savedFlights;
     }
 
     public List<Flight> getSavedFlights() {

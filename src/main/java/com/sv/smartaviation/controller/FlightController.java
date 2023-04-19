@@ -1,6 +1,7 @@
 package com.sv.smartaviation.controller;
 
 import com.sv.smartaviation.entity.Flight;
+import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.service.FlightsService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.time.LocalDate;
@@ -32,9 +33,9 @@ public class FlightController {
     private final FlightsService flightsService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<com.sv.smartaviation.model.skyscanner.Flight> getFlights(@RequestParam String origin,
-                                                                                   @RequestParam String destination,
-                                                                                   @RequestParam
+    public ResponseEntity<List<SavedFlight>> getFlights(@RequestParam String origin,
+                                                        @RequestParam String destination,
+                                                        @RequestParam
                                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                                    LocalDate departureDate) {
         return ResponseEntity.ok(flightsService.getFlights(origin, destination, departureDate));

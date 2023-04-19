@@ -5,5 +5,5 @@ import java.util.UUID;
 @lombok.Data
 public class Context {
     private String status;
-    private UUID sessionID;
+    private UUID sessionId;
 }

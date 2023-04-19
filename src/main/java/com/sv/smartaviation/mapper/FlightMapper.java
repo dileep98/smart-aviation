@@ -1,6 +1,7 @@
 package com.sv.smartaviation.mapper;
 
 import com.sv.smartaviation.entity.Flight;
+import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.model.skyscanner.Leg;
 import com.sv.smartaviation.model.skyscanner.PricingOption;
 import org.mapstruct.Mapper;
@@ -21,4 +22,6 @@ public interface FlightMapper {
     @Mapping(target = "arrivalDateTime", source = "leg.arrival")
     @Mapping(target = "id", source = "leg.id")
     Flight map(Leg leg, PricingOption pricingOption);
+
+    SavedFlight map(Flight flight);
 }

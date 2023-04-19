@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 @lombok.Data
 public class SavedFlight {
 
+    private String id;
     private String originName;
 
     private String originCode;
