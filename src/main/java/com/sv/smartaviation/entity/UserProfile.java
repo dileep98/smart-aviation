@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
@@ -26,11 +27,11 @@ public class UserProfile extends DateAudit {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false, columnDefinition = "BOOLEAN")
     private Boolean smsToggle = false;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false, columnDefinition = "BOOLEAN")
     private Boolean emailToggle = false;
 
