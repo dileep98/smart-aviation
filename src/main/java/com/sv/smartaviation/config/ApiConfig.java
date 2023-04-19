@@ -9,9 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class ApiConfig {
     private boolean debug = false;
+    private SkyScannerConfig skyScanner;
 
-    @Configuration
-    @ConfigurationProperties(prefix = "sky-scanner")
     @Data
     public static class SkyScannerConfig {
         private String url;

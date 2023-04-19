@@ -13,6 +13,7 @@ import com.sv.smartaviation.model.auth.RefreshRequest;
 import com.sv.smartaviation.model.auth.SignUpRequest;
 import com.sv.smartaviation.repository.RoleRepository;
 import com.sv.smartaviation.repository.UserRepository;
+import com.sv.smartaviation.service.UserProfileService;
 import java.net.URI;
 import java.util.Collections;
 import javax.validation.Valid;
@@ -44,6 +45,8 @@ public class AuthController {
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
+
+    private final UserProfileService userProfileService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -109,6 +112,8 @@ public class AuthController {
 
 
         User result = userRepository.save(user);
+
+        userProfileService.saveUserProfile(signUpRequest.getUserProfile(), result);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/v1/users/{username}")

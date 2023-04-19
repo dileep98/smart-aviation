@@ -21,7 +21,6 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 public class SkyScannerRestTemplate {
 
     private final ApiConfig apiConfig;
-    private final ApiConfig.SkyScannerConfig skyScannerConfig;
 
     @Bean
     public RestTemplate restTemplate() {
@@ -31,13 +30,13 @@ public class SkyScannerRestTemplate {
         if (CollectionUtils.isEmpty(interceptors)) {
             interceptors = new ArrayList<>();
         }
-        interceptors.add(new ApiKeyInterceptor(skyScannerConfig));
+        interceptors.add(new ApiKeyInterceptor(apiConfig.getSkyScanner()));
         if (apiConfig.isDebug() && log.isDebugEnabled()) {
             restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
             interceptors.add(new LoggingInterceptor());
         }
         restTemplate.setInterceptors(interceptors);
-        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(skyScannerConfig.getUrl()));
+        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(apiConfig.getSkyScanner().getUrl()));
         return restTemplate;
     }
 
