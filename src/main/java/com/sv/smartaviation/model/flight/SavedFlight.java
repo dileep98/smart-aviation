@@ -2,7 +2,7 @@ package com.sv.smartaviation.model.flight;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.NotNull;
 
 @lombok.Data
 public class SavedFlight {
@@ -29,4 +29,7 @@ public class SavedFlight {
     private Double price;
 
     private Long userId;
+
+    @NotNull
+    private String flightNumber;
 }

@@ -1,23 +1,13 @@
 package com.sv.smartaviation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sv.smartaviation.auth.UserPrincipal;
 import com.sv.smartaviation.entity.Flight;
-import com.sv.smartaviation.entity.User;
-import com.sv.smartaviation.entity.UserProfile;
 import com.sv.smartaviation.exception.ResourceNotFoundException;
 import com.sv.smartaviation.mapper.FlightMapper;
 import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.repository.FlightRepository;
-import com.sv.smartaviation.repository.UserProfileRepository;
+import com.sv.smartaviation.repository.UserFlightPreferenceRepository;
 import com.sv.smartaviation.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -25,6 +15,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
@@ -36,14 +30,8 @@ public class FlightsService {
     private final UserRepository userRepository;
     private final FlightMapper flightMapper;
     private final SmsSevice smsSevice;
-
-    private final UserProfileService userProfileService;
-
-    private final AuthenticationManager authenticationManager;
-
-    private final UserProfileRepository userProfileRepository;
-
-
+    private final EmailService emailService;
+    private final UserFlightPreferenceRepository userFlightPreferenceRepository;
 
 
     public List<SavedFlight> getFlights(String origin, String destination, LocalDate departureDate) {
@@ -70,7 +58,7 @@ public class FlightsService {
                 f -> f.getLegs().forEach(
                         l -> {
                             var flightEntityOptional = flightRepository.findById(l.getId());
-                            if(flightEntityOptional.isPresent()) {
+                            if (flightEntityOptional.isPresent()) {
                                 var flight1 = flightEntityOptional.get();
                                 var savedFlight = flightMapper.map(flight1);
                                 savedFlights.add(savedFlight);
@@ -105,16 +93,30 @@ public class FlightsService {
     }
 
     public Flight updateFlight(Flight flight) {
-
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = ((UserPrincipal)authentication.getPrincipal()).getId();
-        String userEmail = ((UserPrincipal)authentication.getPrincipal()).getEmail();
-//        String userPhoneNumber = ((UserPrincipal)authentication.getPrincipal()).get();
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
-        if(user.getUserProfile().getEmailToggle()){
-
+        Flight updatedFlight = null;
+        try {
+            updatedFlight = flightRepository.save(flight);
+        } catch (Exception e) {
+            log.error("Error occurred while updating flight", e);
         }
-        return flightRepository.save(flight);
+
+        var flightPreferences = userFlightPreferenceRepository.findAllByFlightIdAAndEnabled(flight.getId());
+        flightPreferences.forEach(
+                userFlightPreference -> {
+                    var user = userFlightPreference.getUser();
+                    var profile = user.getUserProfile();
+                    String subject = String.format("Update on flight %s", flight.getFlightNumber());
+                    String message = String.format("Your flight %s got updated with Departure Time: %s Arrival Time: %s",
+                            flight.getFlightNumber(), flight.getDepartureDateTime(), flight.getArrivalDateTime());
+                    if (profile.getEmailToggle()) {
+                        emailService.sendEmail(user.getEmail(), subject, message);
+                    }
+                    if (profile.getSmsToggle()) {
+                        smsSevice.sendSms(profile.getPhoneNumber(), message);
+                    }
+                }
+        );
+        return updatedFlight;
     }
 
 

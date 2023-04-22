@@ -57,4 +57,7 @@ public class Flight extends DateAudit {
     @NotNull
     @Column(nullable = false)
     private Double price;
+
+    @Column(nullable = false)
+    private String flightNumber;
 }

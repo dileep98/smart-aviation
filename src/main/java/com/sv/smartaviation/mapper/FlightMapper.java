@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface FlightMapper {
 
+    @Mapping(target = "flightNumber", expression = "java(leg.getSegments().get(0).getFlightNumber())")
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "carrierName", expression = "java(leg.getCarriers().getMarketing().get(0).getName())")
