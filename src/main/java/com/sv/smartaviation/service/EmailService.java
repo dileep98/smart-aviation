@@ -17,6 +17,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+        message.setFrom("Smart Aviation <no-reply@smart-aviation.com>");
         mailSender.send(message);
     }
 }

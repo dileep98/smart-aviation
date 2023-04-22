@@ -1,6 +1,9 @@
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 INSERT INTO roles(name) VALUES('ROLE_USER');
 
+INSERT INTO users(id,created_at,updated_at,email,name,password,username) VALUES(0,SYSDATE,SYSDATE,"admin@gmail.com","$2a$10$88oOES/4Im1IayyawqQmaOifGFJ98JLr6YAGTfsToLLZq9tj.ajOi","admin");
+INSERT INTO user_roles(user_id,role_id) VALUES(0,1);
+
 INSERT INTO airports(code,time_zone_id,name,city_code,country_id,location,elevation,url,icao,city,county,state) VALUES ('UGL','Antarctica/South_Pole','Union Glacier Blue-Ice Runway','UGL','AQ','POINT (-83.320833 -79.777778)',2461,NULL,'SCGC',NULL,NULL,NULL);
 INSERT INTO airports(code,time_zone_id,name,city_code,country_id,location,elevation,url,icao,city,county,state) VALUES ('SXW','Pacific/Port_Moresby','Sauren','SXW','PG','POINT (148.95305 -5.971389)',177,NULL,'AYSV',NULL,NULL,NULL);
 INSERT INTO airports(code,time_zone_id,name,city_code,country_id,location,elevation,url,icao,city,county,state) VALUES ('NDV','America/New_York','USN Heliport','NDV','US','POINT (-77 38.86667)',19,NULL,NULL,NULL,NULL,NULL);

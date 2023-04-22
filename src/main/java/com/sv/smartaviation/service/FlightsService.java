@@ -29,7 +29,7 @@ public class FlightsService {
     private final FlightRepository flightRepository;
     private final UserRepository userRepository;
     private final FlightMapper flightMapper;
-    private final SmsSevice smsSevice;
+    private final SmsService smsService;
     private final EmailService emailService;
     private final UserFlightPreferenceRepository userFlightPreferenceRepository;
 
@@ -100,7 +100,7 @@ public class FlightsService {
             log.error("Error occurred while updating flight", e);
         }
 
-        var flightPreferences = userFlightPreferenceRepository.findAllByFlightIdAAndEnabled(flight.getId());
+        var flightPreferences = userFlightPreferenceRepository.findAllByFlightIdAndEnabledIsTrue(flight.getId());
         flightPreferences.forEach(
                 userFlightPreference -> {
                     var user = userFlightPreference.getUser();
@@ -112,7 +112,7 @@ public class FlightsService {
                         emailService.sendEmail(user.getEmail(), subject, message);
                     }
                     if (profile.getSmsToggle()) {
-                        smsSevice.sendSms(profile.getPhoneNumber(), message);
+                        smsService.sendSms(profile.getPhoneNumber(), message);
                     }
                 }
         );

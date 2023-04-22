@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserFlightPreferenceRepository extends JpaRepository<UserFlightPreference, Long> {
     List<UserFlightPreference> findAllByUserId(Long userId);
-    List<UserFlightPreference> findAllByFlightIdAAndEnabled(String id);
+    List<UserFlightPreference> findAllByFlightIdAndEnabledIsTrue(String id);
 }

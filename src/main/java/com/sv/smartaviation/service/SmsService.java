@@ -12,21 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class SmsSevice {
-    @Value("${twilio.account.sid}")
-    private String ACCOUNT_SID;
+public class SmsService {
+    @Value("${api.twilio.account.sid}")
+    private String accountSid;
 
-    @Value("${twilio.auth.token}")
-    private String AUTH_TOKEN;
+    @Value("${api.twilio.auth.token}")
+    private String authToken;
 
-    @Value("${twilio.from.number}")
-    private String FROM_NUMBER;
+    @Value("${api.twilio.from.number}")
+    private String fromNumber;
 
     public void sendSms(String to, String message) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Twilio.init(accountSid, authToken);
         Message.creator(
                 new PhoneNumber(to),
-                new PhoneNumber(FROM_NUMBER),
+                new PhoneNumber(fromNumber),
                 message
         ).create();
     }
