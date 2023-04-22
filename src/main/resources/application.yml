@@ -29,6 +29,17 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
       WRITE_DATES_AS_TIMESTAMPS: 'false'
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dk26092@gmail.com
+    password: qttbkbrrcsfogera
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 
 app:
@@ -55,6 +66,13 @@ api:
     host: skyscanner44.p.rapidapi.com
     #    key: ${AIR_LABS_KEY}
     key: ytXEqjajXYmsh5qUKlYWDuuTot1fp18ZX42jsnKFioZ4Sk2kMI
+  twilio:
+    account:
+      sid: AC6a5dfc95a71923ff196cc5c072160bb0
+    auth:
+      token: 3c4ab08e929d3a817a3b25673776f29d
+    from:
+      number: +18449632062
 
 server:
   port: 9000
