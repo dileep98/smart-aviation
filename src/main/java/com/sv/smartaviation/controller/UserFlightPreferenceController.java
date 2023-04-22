@@ -40,13 +40,13 @@ public class UserFlightPreferenceController {
     }
 
     @GetMapping("/user/{userId}")
-    @PreAuthorize("userId == authentication.principal.id")
+    @PreAuthorize("#userId == authentication.principal.id")
     public ResponseEntity<List<UserFlightPreferenceResponse>> getUserFlightPreferenceForUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userFlightPreferenceService.getUserFlightPreferenceForUser(userId));
     }
 
     @PostMapping
-    @PreAuthorize("userFlightPreference.userId == authentication.principal.id")
+    @PreAuthorize("#userFlightPreference.userId == authentication.principal.id")
     public ResponseEntity<UserFlightPreferenceResponse> saveUserFlightPreference(@Valid @RequestBody UserFlightPreference userFlightPreference) {
 
         if (userFlightPreference.getId() != null) {
@@ -63,7 +63,7 @@ public class UserFlightPreferenceController {
     }
 
     @PutMapping
-    @PreAuthorize("userFlightPreference.userId == authentication.principal.id")
+    @PreAuthorize("#userFlightPreference.userId == authentication.principal.id")
     public ResponseEntity<UserFlightPreferenceResponse> updateUserFlightPreference(@Valid @RequestBody UserFlightPreference userFlightPreference) {
         if (userFlightPreference.getId() == null) {
             throw new BadRequestException("Id is required for update");
