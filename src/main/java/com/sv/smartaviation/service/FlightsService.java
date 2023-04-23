@@ -2,9 +2,11 @@ package com.sv.smartaviation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sv.smartaviation.entity.Flight;
+import com.sv.smartaviation.exception.InternalServerErrorException;
 import com.sv.smartaviation.exception.ResourceNotFoundException;
 import com.sv.smartaviation.mapper.FlightMapper;
 import com.sv.smartaviation.model.flight.SavedFlight;
+import com.sv.smartaviation.model.flight.UpdateFlightRequest;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserFlightPreferenceRepository;
 import com.sv.smartaviation.repository.UserRepository;
@@ -75,15 +77,22 @@ public class FlightsService {
         return savedFlights;
     }
 
-    public List<Flight> getSavedFlights() {
-        return flightRepository.findAll();
+    public List<SavedFlight> getSavedFlights() {
+        return flightRepository
+                .findAll()
+                .parallelStream()
+                .map(flightMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public Flight getFlightsById(String flightId) {
-        return flightRepository.findById(flightId).orElseThrow(() -> new ResourceNotFoundException("Flight", "flightId", flightId));
+    public SavedFlight getFlightsById(String flightId) {
+        return flightRepository
+                .findById(flightId)
+                .map(flightMapper::map)
+                .orElseThrow(() -> new ResourceNotFoundException("Flight", "flightId", flightId));
     }
 
-    public List<Flight> getFlightsByUserId(Long userId) {
+    public List<SavedFlight> getFlightsByUserId(Long userId) {
         var user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
         return user.getUserFlightPreferences()
                 .stream()
@@ -92,22 +101,30 @@ public class FlightsService {
                 .collect(Collectors.toList());
     }
 
-    public Flight updateFlight(Flight flight) {
-        Flight updatedFlight = null;
+    public SavedFlight updateFlight(UpdateFlightRequest updateFlightRequest) {
+        Flight updatedFlight;
+
+        if (!flightRepository.existsById(updateFlightRequest.getId())) {
+            throw new ResourceNotFoundException("flight", "updateFlightRequest.id", updateFlightRequest.getId());
+        }
+
         try {
+            var flight = flightMapper.map(updateFlightRequest);
             updatedFlight = flightRepository.save(flight);
         } catch (Exception e) {
             log.error("Error occurred while updating flight", e);
+            throw new InternalServerErrorException("Error occurred while updating flight", e);
         }
 
-        var flightPreferences = userFlightPreferenceRepository.findAllByFlightIdAndEnabledIsTrue(flight.getId());
+        var flightPreferences = userFlightPreferenceRepository.findAllByFlightIdAndEnabledIsTrue(updatedFlight.getId());
+        Flight finalUpdatedFlight = updatedFlight;
         flightPreferences.forEach(
                 userFlightPreference -> {
                     var user = userFlightPreference.getUser();
                     var profile = user.getUserProfile();
-                    String subject = String.format("Update on flight %s", flight.getFlightNumber());
+                    String subject = String.format("Update on flight %s", finalUpdatedFlight.getFlightNumber());
                     String message = String.format("Your flight %s got updated with Departure Time: %s Arrival Time: %s",
-                            flight.getFlightNumber(), flight.getDepartureDateTime(), flight.getArrivalDateTime());
+                            finalUpdatedFlight.getFlightNumber(), finalUpdatedFlight.getDepartureDateTime(), finalUpdatedFlight.getArrivalDateTime());
                     if (profile.getEmailToggle()) {
                         emailService.sendEmail(user.getEmail(), subject, message);
                     }
@@ -116,7 +133,7 @@ public class FlightsService {
                     }
                 }
         );
-        return updatedFlight;
+        return flightMapper.map(updatedFlight);
     }
 
 

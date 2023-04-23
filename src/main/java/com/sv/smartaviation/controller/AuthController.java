@@ -5,7 +5,7 @@ import com.sv.smartaviation.auth.UserPrincipal;
 import com.sv.smartaviation.entity.Role;
 import com.sv.smartaviation.entity.RoleName;
 import com.sv.smartaviation.entity.User;
-import com.sv.smartaviation.exception.AppException;
+import com.sv.smartaviation.exception.InternalServerErrorException;
 import com.sv.smartaviation.model.auth.ApiResponse;
 import com.sv.smartaviation.model.auth.JwtAuthenticationResponse;
 import com.sv.smartaviation.model.auth.LoginRequest;
@@ -74,7 +74,7 @@ public class AuthController {
     public ResponseEntity<JwtAuthenticationResponse> refreshToken(@Valid @RequestBody RefreshRequest refreshRequest) {
         String requestRefreshToken = refreshRequest.getRefreshToken();
         if (!tokenProvider.validateToken(requestRefreshToken)) {
-            throw new AppException("Invalid refresh token");
+            throw new InternalServerErrorException("Invalid refresh token");
         }
 
         var userId = tokenProvider.getUserIdFromJWT(requestRefreshToken);
@@ -106,7 +106,7 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+                .orElseThrow(() -> new InternalServerErrorException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
 
