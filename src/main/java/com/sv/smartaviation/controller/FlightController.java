@@ -32,8 +32,8 @@ public class FlightController {
 
     private final FlightsService flightsService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<SavedFlight>> getFlights(@RequestParam String origin,
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value = "/search")
+    public ResponseEntity<List<SavedFlight>> searchFlights(@RequestParam String origin,
                                                         @RequestParam String destination,
                                                         @RequestParam
                                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
