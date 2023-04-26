@@ -1,6 +1,7 @@
 package com.sv.smartaviation.controller;
 
 import com.sv.smartaviation.auth.UserPrincipal;
+import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.model.user.UserFlightPreference;
 import com.sv.smartaviation.model.user.UserFlightPreferenceResponse;
 import com.sv.smartaviation.service.UserFlightPreferenceService;
@@ -57,6 +58,13 @@ public class UserFlightPreferenceController {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = ((UserPrincipal) authentication.getPrincipal()).getId();
         var result = userFlightPreferenceService.saveOrUpdateFlightPreferences(userFlightPreference, userId);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/flights")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<SavedFlight>> getAllEnabledFlights() {
+        var result = userFlightPreferenceService.getAllEnabledFlights();
         return ResponseEntity.ok(result);
     }
 }

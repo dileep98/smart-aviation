@@ -1,13 +1,16 @@
 package com.sv.smartaviation.service;
 
 import com.sv.smartaviation.exception.ResourceNotFoundException;
+import com.sv.smartaviation.mapper.FlightMapper;
 import com.sv.smartaviation.mapper.UserFlightPreferenceMapper;
+import com.sv.smartaviation.model.flight.SavedFlight;
 import com.sv.smartaviation.model.user.UserFlightPreference;
 import com.sv.smartaviation.model.user.UserFlightPreferenceResponse;
 import com.sv.smartaviation.repository.FlightRepository;
 import com.sv.smartaviation.repository.UserFlightPreferenceRepository;
 import com.sv.smartaviation.repository.UserRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,7 @@ public class UserFlightPreferenceService {
     private final FlightRepository flightRepository;
     private final UserRepository userRepository;
     private final UserFlightPreferenceMapper userFlightPreferenceMapper;
+    private final FlightMapper flightMapper;
 
     public UserFlightPreferenceResponse saveOrUpdateFlightPreferences(UserFlightPreference userFlightPreference, Long userId) {
         var user = userRepository.findById(userId)
@@ -54,6 +58,13 @@ public class UserFlightPreferenceService {
         var result = userFlightPreferenceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("UserFlightPreference", "id", id));
         return userFlightPreferenceMapper.map(result);
+    }
+
+    public List<SavedFlight> getAllEnabledFlights() {
+        return userFlightPreferenceRepository.findDistinctByFlightId()
+                .stream()
+                .map(flightMapper::map)
+                .collect(Collectors.toList());
     }
 
 }
