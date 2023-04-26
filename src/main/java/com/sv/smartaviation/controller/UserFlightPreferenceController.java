@@ -45,7 +45,7 @@ public class UserFlightPreferenceController {
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<List<UserFlightPreferenceResponse>> getLoggedInUserFlightPreference() {
+    public ResponseEntity<List<UserFlightPreferenceResponse>> getLoggedInUserFlightPreferences() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = ((UserPrincipal) authentication.getPrincipal()).getId();
         return ResponseEntity.ok(userFlightPreferenceService.getUserFlightPreferenceForUser(userId));
