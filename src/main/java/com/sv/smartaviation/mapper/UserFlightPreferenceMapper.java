@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserFlightPreferenceMapper {
 
-    @Mapping(source = "userFlightPreference.id", target = "id")
+    @Mapping(ignore = true, target= "id")
     @Mapping(source = "user", target = "user")
     @Mapping(source = "flight", target = "flight")
     UserFlightPreference mapToEntity(com.sv.smartaviation.model.user.UserFlightPreference userFlightPreference, User user, Flight flight);

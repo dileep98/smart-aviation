@@ -23,19 +23,19 @@ public class UserFlightPreferenceService {
     private final UserRepository userRepository;
     private final UserFlightPreferenceMapper userFlightPreferenceMapper;
 
-    public UserFlightPreferenceResponse updateFlightPreferenceForUser(UserFlightPreference userFlightPreference) {
-        if (!userFlightPreferenceRepository.existsById(userFlightPreference.getId())) {
-            throw new ResourceNotFoundException("UserFlightPreference", "id", userFlightPreference.getId());
-        }
-        return saveFlightPreferenceForUser(userFlightPreference);
-    }
-
-    public UserFlightPreferenceResponse saveFlightPreferenceForUser(UserFlightPreference userFlightPreference) {
-        var user = userRepository.findById(userFlightPreference.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "userPreference.userId", userFlightPreference.getUserId()));
+    public UserFlightPreferenceResponse saveOrUpdateFlightPreferences(UserFlightPreference userFlightPreference, Long userId) {
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "userPreference.userId", userId));
         var flight = flightRepository.findById(userFlightPreference.getFlightId())
                 .orElseThrow(() -> new ResourceNotFoundException("Flight", "userPreference.flightId", userFlightPreference.getFlightId()));
+
         var entity = userFlightPreferenceMapper.mapToEntity(userFlightPreference, user, flight);
+
+        userFlightPreferenceRepository.findByUserIdAndFlightId(userId, flight.getId()).ifPresent(userFlightPreference1 -> {
+            entity.setId(userFlightPreference1.getId());
+        });
+
+
         var saved = userFlightPreferenceRepository.save(entity);
         return userFlightPreferenceMapper.map(saved);
     }

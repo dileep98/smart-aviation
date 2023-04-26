@@ -1,12 +1,10 @@
 package com.sv.smartaviation.controller;
 
 import com.sv.smartaviation.auth.UserPrincipal;
-import com.sv.smartaviation.exception.BadRequestException;
 import com.sv.smartaviation.model.user.UserFlightPreference;
 import com.sv.smartaviation.model.user.UserFlightPreferenceResponse;
 import com.sv.smartaviation.service.UserFlightPreferenceService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +17,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("api/v1/user-flight-pref")
@@ -51,35 +47,16 @@ public class UserFlightPreferenceController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<UserFlightPreferenceResponse>> getLoggedInUserFlightPreference() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = ((UserPrincipal)authentication.getPrincipal()).getId();
+        Long userId = ((UserPrincipal) authentication.getPrincipal()).getId();
         return ResponseEntity.ok(userFlightPreferenceService.getUserFlightPreferenceForUser(userId));
     }
 
-    @PostMapping
-    @PreAuthorize("#userFlightPreference.userId == authentication.principal.id")
-    public ResponseEntity<UserFlightPreferenceResponse> saveUserFlightPreference(@Valid @RequestBody UserFlightPreference userFlightPreference) {
-
-        if (userFlightPreference.getId() != null) {
-            throw new BadRequestException("Id should be null for new preference");
-        }
-
-        var result = userFlightPreferenceService.saveFlightPreferenceForUser(userFlightPreference);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/v1/users-flight-pref/{id}")
-                .buildAndExpand(result.getId()).toUri();
-
-        return ResponseEntity.created(location).body(result);
-    }
-
-    @PutMapping
-    @PreAuthorize("#userFlightPreference.userId == authentication.principal.id")
-    public ResponseEntity<UserFlightPreferenceResponse> updateUserFlightPreference(@Valid @RequestBody UserFlightPreference userFlightPreference) {
-        if (userFlightPreference.getId() == null) {
-            throw new BadRequestException("Id is required for update");
-        }
-        var result = userFlightPreferenceService.updateFlightPreferenceForUser(userFlightPreference);
+    @PostMapping("/me")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<UserFlightPreferenceResponse> saveOrUpdateFlightPreferences(@Valid @RequestBody UserFlightPreference userFlightPreference) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((UserPrincipal) authentication.getPrincipal()).getId();
+        var result = userFlightPreferenceService.saveOrUpdateFlightPreferences(userFlightPreference, userId);
         return ResponseEntity.ok(result);
     }
-
 }
