@@ -1,5 +1,6 @@
 package com.sv.smartaviation.controller;
 
+import com.sv.smartaviation.auth.UserPrincipal;
 import com.sv.smartaviation.exception.BadRequestException;
 import com.sv.smartaviation.model.user.UserFlightPreference;
 import com.sv.smartaviation.model.user.UserFlightPreferenceResponse;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +42,16 @@ public class UserFlightPreferenceController {
     }
 
     @GetMapping("/user/{userId}")
-    @PreAuthorize("#userId == authentication.principal.id")
+    @PreAuthorize("#userId == authentication.principal.id or hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<UserFlightPreferenceResponse>> getUserFlightPreferenceForUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(userFlightPreferenceService.getUserFlightPreferenceForUser(userId));
+    }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<List<UserFlightPreferenceResponse>> getLoggedInUserFlightPreference() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((UserPrincipal)authentication.getPrincipal()).getId();
         return ResponseEntity.ok(userFlightPreferenceService.getUserFlightPreferenceForUser(userId));
     }
 
