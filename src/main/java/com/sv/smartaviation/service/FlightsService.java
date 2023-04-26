@@ -44,17 +44,17 @@ public class FlightsService {
         request.put("departureDate", departureDate.toString());
         request.put("currency", "USD");
         // Mock code
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        com.sv.smartaviation.model.skyscanner.Flight flight = new com.sv.smartaviation.model.skyscanner.Flight();
-        try {
-            String file = "src/test/resources/getFlights.json";
-            String json = readFileAsString(file);
-            flight = mapper.readValue(json, com.sv.smartaviation.model.skyscanner.Flight.class);
-        } catch (Exception e) {
-            log.error("Error while mapping", e);
-        } // Mock code
-//        var flight = restTemplate.getForObject("/search-extended?adults={adults}&origin={origin}&destination={destination}&departureDate={departureDate}&currency={currency}", com.sv.smartaviation.model.skyscanner.Flight.class, request);
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.findAndRegisterModules();
+//        com.sv.smartaviation.model.skyscanner.Flight flight = new com.sv.smartaviation.model.skyscanner.Flight();
+//        try {
+//            String file = "src/test/resources/getFlights.json";
+//            String json = readFileAsString(file);
+//            flight = mapper.readValue(json, com.sv.smartaviation.model.skyscanner.Flight.class);
+//        } catch (Exception e) {
+//            log.error("Error while mapping", e);
+//        } // Mock code
+        var flight = restTemplate.getForObject("/search-extended?adults={adults}&origin={origin}&destination={destination}&departureDate={departureDate}&currency={currency}", com.sv.smartaviation.model.skyscanner.Flight.class, request);
         List<SavedFlight> savedFlights = new ArrayList<>();
         flight.getItineraries().getResults().forEach(
                 f -> f.getLegs().forEach(
