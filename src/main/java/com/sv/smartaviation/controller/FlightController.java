@@ -56,14 +56,6 @@ public class FlightController {
         return ResponseEntity.ok(flightsService.getFlightsByUserId(userId));
     }
 
-    @GetMapping("/me/flights")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<List<SavedFlight>> getLoggedInUserFlights() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = ((UserPrincipal)authentication.getPrincipal()).getId();
-        return ResponseEntity.ok(flightsService.getFlightsByUserId(userId));
-    }
-
     @GetMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<SavedFlight>> getSavedFlights() {
