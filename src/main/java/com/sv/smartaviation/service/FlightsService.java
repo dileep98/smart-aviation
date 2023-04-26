@@ -109,8 +109,11 @@ public class FlightsService {
         }
 
         try {
-            var flight = flightMapper.map(updateFlightRequest);
-            updatedFlight = flightRepository.save(flight);
+            var existingFlight = flightRepository.findById(updateFlightRequest.getId())
+                    .orElseThrow(()->new ResourceNotFoundException("flight", "updateFlightRequest.id", updateFlightRequest.getId()));
+            existingFlight.setArrivalDateTime(updateFlightRequest.getArrivalDateTime());
+            existingFlight.setDepartureDateTime(updateFlightRequest.getDepartureDateTime());
+            updatedFlight = flightRepository.save(existingFlight);
         } catch (Exception e) {
             log.error("Error occurred while updating flight", e);
             throw new InternalServerErrorException("Error occurred while updating flight", e);
